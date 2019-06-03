@@ -49,6 +49,7 @@ body {
   flex-direction: column;
   justify-content: space-around;
   background-color: #00a5cf;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .wrapper {
@@ -63,6 +64,7 @@ header {
   justify-content: center;
   align-items: center;
   background-color: #dfbbb1;
+  font-size: 30px;
   color: #000;
   padding: 20px 0;
   text-transform: uppercase;
@@ -131,7 +133,7 @@ button:hover {
   height: 300px;
   margin: 5% 2% 1%;
   background-color: #9fffcb;
-  font-size: 18px;
+  font-size: 20px;
   border-radius: 10px;
   box-shadow: 0px 0px 10px 5px rgba(0,0,0,0.75);
   /* visibility: hidden; */
@@ -140,7 +142,7 @@ button:hover {
 .item {
   width: 80%;
   margin: 10px 0;
-  font-size: 20px;
+  font-size: 25px;
   font-weight: 700;
   text-transform: uppercase;
   
@@ -179,6 +181,9 @@ button:hover {
 }
 
 @media(max-width:660px) {
+  header {
+    font-size: 20px;
+  }
   form {
     width: 70%;
   }

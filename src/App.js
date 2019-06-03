@@ -77,7 +77,7 @@ class App extends Component {
     return (
       <div className="App">
         <header>
-          <h1>Let's Get Packing</h1>
+          <h1>Let's Get Packing !</h1>
         </header>
         <div className="dataOutput wrapper">
           <form action="submit">
