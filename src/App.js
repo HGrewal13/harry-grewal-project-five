@@ -8,12 +8,16 @@ class App extends Component {
     this.state = {
       items: [],
       userInput: '',
-      userName: ''
+      userName: '',
+      error: false
     }
   }
 
   // 1 reusable method that supports multiple inputs
   handleChange = (event) => {
+    this.setState ({
+        error: false
+      })
     console.log('calling handle change', event.target);
     const inputTextValue = event.target.value;
     const inputTextName = event.target.name;
@@ -25,22 +29,22 @@ class App extends Component {
 
   handleClick = (event) => {
     event.preventDefault();
-    // DO WE HAVE TO PUT THIS IN FOR ANY REACT METHOD THAT INTERACTS WITH THE FIREBASE DATA?
-    const dbRef = firebase.database().ref();
+    console.log(this.state.userInput.length, this.state.userName.length);
 
-    // 3 push a object to firebase with the name input and item input values
-    dbRef.push({
-      name: this.state.userName,
-      item: this.state.userInput
-    });
-    this.setState({userInput: ""})
-    this.setState({userName: ""})
-  }
+    if (this.state.userInput.length > 0 && this.state.userName.length > 0) {
+      const dbRef = firebase.database().ref();
 
-  handleClaim = (event) => {
-    let chosenCard = document.getElementsByClassName('.itemDiv');
-    // chosenCard.('claimed
-    console.log("Change Color");
+      // 3 push a object to firebase with the name input and item input values
+      dbRef.push({
+        name: this.state.userName,
+        item: this.state.userInput
+      });
+      this.setState({userInput: ""})
+      this.setState({userName: ""})
+    } 
+    // else {
+      
+    // }
   }
 
   removeItem(itemKey) {
@@ -52,7 +56,7 @@ class App extends Component {
   componentDidMount() {
     const dbRef = firebase.database().ref();
     
-    // dbRef.on('value') refers to "when a value is updated on the firebase database?"
+    // dbRef.on('value') refers to "when a value is updated on the firebase database"
     // response refers to "when we get a value update, do this ->"
     dbRef.on('value', (response) => {
       console.log(response.val());
@@ -81,6 +85,9 @@ class App extends Component {
         </header>
         <div className="dataOutput wrapper">
           <form action="submit">
+            {this.state.userName.length, this.state.userInput.length === 0 &&
+              <h2 className = "inputError">Please Fill In The Appropriate Fields</h2>
+            }
 
             <label htmlFor="person"></label>
 
@@ -92,7 +99,7 @@ class App extends Component {
               onChange={this.handleChange}
               value={this.state.userName} 
               placeholder = "What Is Your Name?"
-              required="required"/>
+              required="true"/>
 
             <label htmlFor="newItem"></label>
 
@@ -103,7 +110,7 @@ class App extends Component {
             onChange={this.handleChange}
             value={this.state.userInput} 
             placeholder = "Add An Item To Bring"
-            required="required"/>
+            required='true'/>
 
             <button type="submit" onClick={this.handleClick}>Add To List</button>
 
@@ -112,7 +119,7 @@ class App extends Component {
           <section className="displayItems">
               {this.state.items.map((item) => {
                 return <div key={item.key} className="itemDiv">
-                          <div className="item">{item.item}</div>
+                          <div className="item" aria-label={item.item}>{item.item}</div>
                           <p>will be brought by {item.name}</p>
                           <button onClick = {() => this.removeItem(item.key)}>Remove Item</button>
                         </div>

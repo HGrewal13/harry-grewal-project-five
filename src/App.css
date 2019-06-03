@@ -72,7 +72,6 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  /* background-color: #00a5cf; */
 }
 
 form {
@@ -111,10 +110,19 @@ button:hover {
   cursor: pointer;
 }
 
+button:active {
+  background-color:rgba(226, 49, 49, 1);
+}
+
 .displayItems {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+}
+
+.inputError {
+  font-size: 20px;
+  padding-bottom: 2%;
 }
 
 .itemDiv {
@@ -138,6 +146,10 @@ button:hover {
   font-weight: 700;
   text-transform: uppercase;
   
+}
+
+.itemDiv p {
+  padding: 0 1%;
 }
 
 .itemDiv button {
