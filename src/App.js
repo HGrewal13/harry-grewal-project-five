@@ -16,6 +16,7 @@ class App extends Component {
   // 1 reusable method that supports multiple inputs
   handleChange = (event) => {
     this.setState ({
+      // sets error = to false while there is a change happening within the input fields
         error: false
       })
     console.log('calling handle change', event.target);
@@ -31,6 +32,7 @@ class App extends Component {
     event.preventDefault();
     console.log(this.state.userInput.length, this.state.userName.length);
 
+    // If the userinput and username fields are populated, print to Firebase
     if (this.state.userInput.length > 0 && this.state.userName.length > 0) {
       const dbRef = firebase.database().ref();
 
@@ -42,9 +44,6 @@ class App extends Component {
       this.setState({userInput: ""})
       this.setState({userName: ""})
     } 
-    // else {
-      
-    // }
   }
 
   removeItem(itemKey) {
@@ -84,13 +83,15 @@ class App extends Component {
           <h1>Let's Get Packing !</h1>
         </header>
         <div className="dataOutput wrapper">
+
+          {/* Beginning of Form Element that requires 2 inputs */}
           <form action="submit">
+            {/* Print out the following h2 message if the userInput.length is 0 */}
             {this.state.userName.length, this.state.userInput.length === 0 &&
               <h2 className = "inputError">Please Fill In The Appropriate Fields</h2>
             }
 
             <label htmlFor="person"></label>
-
             <input
               type="text"
               id="person"
@@ -102,7 +103,6 @@ class App extends Component {
               required="true"/>
 
             <label htmlFor="newItem"></label>
-
             <input 
             type="text" 
             id="newItem" 
@@ -113,14 +113,16 @@ class App extends Component {
             required='true'/>
 
             <button type="submit" onClick={this.handleClick}>Add To List</button>
-
+            {/* End of Form */}
           </form>
 
+            {/* Section to display the name and item entered onto the DOM */}
           <section className="displayItems">
               {this.state.items.map((item) => {
                 return <div key={item.key} className="itemDiv">
                           <div className="item" aria-label={item.item}>{item.item}</div>
                           <p>will be brought by {item.name}</p>
+                          {/* Remove Items option */}
                           <button onClick = {() => this.removeItem(item.key)}>Remove Item</button>
                         </div>
               })}
