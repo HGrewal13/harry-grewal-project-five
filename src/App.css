@@ -35,7 +35,7 @@
 * {
   padding: 0;
   margin: 0;
-  /* border: 1px solid red; */
+  border: 1px solid red;
   
 }
 body {
@@ -65,6 +65,7 @@ header {
   background-color: #dfbbb1;
   color: #000;
   padding: 20px 0;
+  text-transform: uppercase;
 }
 
 .dataOutput {
@@ -76,10 +77,11 @@ header {
 }
 
 form {
-  width: 30%;
+  width: 550px;
+  height: 250px;
   /* border: 1px solid red; */
   margin: 30px auto;
-  margin-bottom: 50px;
+  margin-bottom: 30px;
   padding: 50px 0;
   display: flex;
   flex-direction: column;
@@ -125,9 +127,9 @@ button:hover {
   justify-content: space-between;
   align-items: center;
   /* border: 1px solid red; */
-  width: 20%;
-  height: 250px;
-  margin: 0 2% 1%;
+  width: 25%;
+  height: 300px;
+  margin: 5% 2% 1%;
   background-color: #9fffcb;
   font-size: 18px;
   border-radius: 10px;
@@ -139,11 +141,13 @@ button:hover {
   width: 80%;
   margin: 10px 0;
   font-size: 20px;
+  font-weight: 700;
   text-transform: uppercase;
+  
 }
 
 .itemDiv button {
-  width: 80%;
+  width: 90%;
   padding: 7px 0;
   margin-bottom: 10px;
   border-radius: 10px;
@@ -152,4 +156,33 @@ button:hover {
 
 .claimed {
   background-color: green;
+}
+
+@media(max-width: 1200px) {
+  .wrapper {
+    width: 100%;
+  }
+}
+
+@media(max-width:960px) {
+  .wrapper {
+
+  }
+
+  form {
+    width: 450px;
+  }
+
+  .itemDiv {
+    width: 40%;
+  }
+}
+
+@media(max-width:660px) {
+  form {
+    width: 70%;
+  }
+  .itemDiv {
+    width: 70%;
+  }
 }
